@@ -35,6 +35,7 @@ void Field::move(std::string str)
   {
     for (int i = 0; i < 16; i++)
     {
+      bool need_break = false;
       for (int j = 0; j < 20; j++)
       {
         if (field[i][j][0])
@@ -61,6 +62,7 @@ void Field::move(std::string str)
           {
             field[i][j+1][0] = 1;
             field[i][j][0] = 0;
+            break;
           }
         }
       }
