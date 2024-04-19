@@ -1,3 +1,6 @@
+#ifndef FIELD_HPP
+#define FIELD_HPP
+
 #include <string>
 
 class Field
@@ -8,5 +11,9 @@ class Field
     void move(std::string str);
     void fall();
   private:
+    void checkBlock();
+    void spawnNew();
     bool field[16][20][2] = {};
 };
+
+#endif

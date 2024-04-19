@@ -64,7 +64,6 @@ int main()
 	std::time_t last_move = std::time(nullptr);
 	while (window.isOpen())
 	{
-
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -93,11 +92,11 @@ int main()
 				f.move("up");
 			}
 		}
-			if (std::time(nullptr) - last_move > 0.5)
-			{
-				f.fall();
-				last_move = std::time(nullptr);
-			}
+		if (std::time(nullptr) - last_move > 0.5)
+		{
+			f.fall();
+			last_move = std::time(nullptr);
+		}
 
 		window.clear();
 		drawBaseField(window);
