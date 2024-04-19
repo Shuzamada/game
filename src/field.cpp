@@ -27,7 +27,6 @@ void Field::move(std::string str)
           field[i][j][0] = 0;
           field[i-1][j][1] = 1;
           field[i][j][1] = 0;
-          checkBlock();
         }
       }
     }
@@ -44,7 +43,6 @@ void Field::move(std::string str)
           field[i][j][0] = 0;
           field[i+1][j][1] = 1;
           field[i][j][1] = 0;
-          checkBlock();
         }
       }
     }
@@ -61,7 +59,6 @@ void Field::move(std::string str)
           field[i][j][0] = 0;
           field[i][j+1][1] = 1;
           field[i][j][1] = 0;
-          checkBlock();
         }
       }
     }
@@ -82,6 +79,7 @@ void Field::move(std::string str)
       }
     }
   }
+  checkBlock();
 }
 
 void Field::fall()
@@ -92,18 +90,44 @@ void Field::fall()
 
 void Field::checkBlock()
 {
+  bool blocked = false;
   for (int i = 0; i < 16; i++)
   {
     for (int j = 1; j < 20; j++)
     {
       if (field[i][j][1] && j == 19)
       {
-        field[i][j][1] = 0;
+        block();
+        blocked = true;
       }
       else if (field[i][j][1] && field[i][j+1][0] && !field[i][j+1][1])
       {
-        field[i][j][1] = 0;
+        block();
+        blocked = true;
       }
     }
   }
+  if (blocked)
+  {
+    spawnNew();
+  }
+}
+
+void Field::block()
+{
+  for (int i = 0; i < 16; i++)
+  {
+    for (int j = 1; j < 20; j++)
+    {
+      field[i][j][1] = 0;
+    }
+  }
+}
+
+void Field::spawnNew()
+{
+  draw(5, 0, 1);
+  draw(5, 1, 1);
+  draw(5, 2, 1);
+  draw(6, 2, 1);
 }
