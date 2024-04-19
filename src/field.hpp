@@ -4,9 +4,9 @@ class Field
 {
   public:
     void draw(char x, char y, bool c);
-    bool check(char x, char y);
+    bool checkLight(char x, char y);
     void move(std::string str);
-    void drop();
+    void fall();
   private:
     bool field[16][20][2] = {};
 };

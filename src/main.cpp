@@ -32,7 +32,7 @@ void draw(sf::RenderWindow& window, Field& f)
 	{
 		for (int j = 0; j < 20; j++)
 		{
-			if (f.check(i, j))
+			if (f.checkLight(i, j))
 			{
 				sf::RectangleShape rectangle(sf::Vector2f(cell_size - 5, cell_size - 5));
 				if (j < 4)
@@ -61,7 +61,7 @@ int main()
 	f.draw(6, 5, 1);
 
 	sf::RenderWindow window(sf::VideoMode(1200, 1200), "test");
-	std::time_t start = std::time(nullptr);
+	std::time_t last_move = std::time(nullptr);
 	while (window.isOpen())
 	{
 
@@ -91,8 +91,13 @@ int main()
 			{
 				std::cout << "pressed Up\n";
 				f.move("up");
-			}		
+			}
 		}
+			if (std::time(nullptr) - last_move > 0.5)
+			{
+				f.fall();
+				last_move = std::time(nullptr);
+			}
 
 		window.clear();
 		drawBaseField(window);

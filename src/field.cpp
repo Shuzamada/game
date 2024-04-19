@@ -5,9 +5,10 @@
 void Field::draw(char x, char y, bool c)
 {
   field[x][y][0] = c;
+  field[x][y][1] = c;
 }
 
-bool Field::check(char x, char y)
+bool Field::checkLight(char x, char y)
 {
   return field[x][y][0];
 }
@@ -20,10 +21,12 @@ void Field::move(std::string str)
     {
       for (int j = 0; j < 20; j++)
       {
-        if (field[i][j][0] && !field[i-1][j][0])
+        if (field[i][j][0] && field[i][j][1] && !field[i-1][j][0])
         {
           field[i-1][j][0] = 1;
           field[i][j][0] = 0;
+          field[i-1][j][1] = 1;
+          field[i][j][1] = 0;
         }
       }
     }
@@ -34,10 +37,12 @@ void Field::move(std::string str)
     {
       for (int j = 0; j < 20; j++)
       {
-        if (field[i][j][0] && !field[i+1][j][0])
+        if (field[i][j][0] && field[i][j][1] && !field[i+1][j][0])
         {
           field[i+1][j][0] = 1;
           field[i][j][0] = 0;
+          field[i+1][j][1] = 1;
+          field[i][j][1] = 0;
         }
       }
     }
@@ -48,10 +53,12 @@ void Field::move(std::string str)
     {
       for (int j = 18; j >= 0; j--)
       {
-        if (field[i][j][0] && !field[i][j+1][0])
+        if (field[i][j][0] && field[i][j][1] && !field[i][j+1][0])
         {
           field[i][j+1][0] = 1;
           field[i][j][0] = 0;
+          field[i][j+1][1] = 1;
+          field[i][j][1] = 0;
         }
       }
     }
@@ -62,12 +69,19 @@ void Field::move(std::string str)
     {
       for (int j = 1; j < 20; j++)
       {
-        if (field[i][j][0] && !field[i][j-1][0])
+        if (field[i][j][0] && field[i][j][1] && !field[i][j-1][0])
         {
           field[i][j-1][0] = 1;
           field[i][j][0] = 0;
+          field[i][j-1][1] = 1;
+          field[i][j][1] = 0;
         }
       }
     }
   }
+}
+
+void Field::fall()
+{
+  move("down");
 }
