@@ -15,6 +15,8 @@ class Field
     void block();
     void spawnNew();
     bool field[16][20][2] = {};
+    char identifyShape();
+    char last_spawned_shape_ = 'J';
 };
 
 #endif

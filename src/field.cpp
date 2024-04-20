@@ -1,6 +1,7 @@
 #include "field.hpp"
 #include <string>
 #include <iostream>
+#include <ctime>
 
 void Field::draw(char x, char y, bool c)
 {
@@ -17,12 +18,29 @@ void Field::move(std::string str)
 {
   if (str == "left")
   {
-    for (int i = 1; i < 16; i++)
+    for (char i = 1; i < 16; i++)
     {
-      for (int j = 0; j < 20; j++)
+      for (char j = 0; j < 20; j++)
       {
-        if (field[i][j][0] && field[i][j][1] && !field[i-1][j][0])
+        if (field[i][j][1] && field[i-1][j][0])
         {
+          break;
+        }
+        if (field[i][j][1] && !field[i-1][j][0])
+        {
+          bool can_move_left = true;
+          for (char l = 0; l < 20; l++)
+          {
+            if (field[i][l][1] && field[i-1][l][0])
+            {
+              can_move_left = false;
+              break;
+            }
+          }
+          if (!can_move_left)
+          {
+            break;
+          }
           field[i-1][j][0] = 1;
           field[i][j][0] = 0;
           field[i-1][j][1] = 1;
@@ -33,12 +51,29 @@ void Field::move(std::string str)
   }
   else if (str == "right")
   {
-    for (int i = 14; i >= 0; i--)
+    for (char i = 14; i >= 0; i--)
     {
-      for (int j = 0; j < 20; j++)
+      for (char j = 0; j < 20; j++)
       {
-        if (field[i][j][0] && field[i][j][1] && !field[i+1][j][0])
+        if (field[i][j][1] && field[i+1][j][0])
         {
+          break;
+        }
+        if (field[i][j][1] && !field[i+1][j][0])
+        {
+          bool can_move_right = true;
+          for (char l = 0; l < 20; l++)
+          {
+            if (field[i][l][1] && field[i+1][l][0])
+            {
+              can_move_right = false;
+              break;
+            }
+          }
+          if (!can_move_right)
+          {
+            break;
+          }
           field[i+1][j][0] = 1;
           field[i][j][0] = 0;
           field[i+1][j][1] = 1;
@@ -49,11 +84,11 @@ void Field::move(std::string str)
   }
   else if (str == "down")
   {
-    for (int i = 0; i < 16; i++)
+    for (char i = 0; i < 16; i++)
     {
-      for (int j = 18; j >= 0; j--)
+      for (char j = 18; j >= 0; j--)
       {
-        if (field[i][j][0] && field[i][j][1] && !field[i][j+1][0])
+        if (field[i][j][1] && !field[i][j+1][0])
         {
           field[i][j+1][0] = 1;
           field[i][j][0] = 0;
@@ -65,9 +100,9 @@ void Field::move(std::string str)
   }
   else if (str == "up")
   {
-    for (int i = 0; i < 16; i++)
+    for (char i = 0; i < 16; i++)
     {
-      for (int j = 1; j < 20; j++)
+      for (char j = 1; j < 20; j++)
       {
         if (field[i][j][0] && field[i][j][1] && !field[i][j-1][0])
         {
@@ -123,11 +158,35 @@ void Field::block()
     }
   }
 }
-
+  // f.draw(4, 3, 1);
+  // f.draw(4, 4, 1);
+  // f.draw(5, 4, 1);
+  // f.draw(6, 4, 1);
 void Field::spawnNew()
 {
-  draw(5, 0, 1);
-  draw(5, 1, 1);
-  draw(5, 2, 1);
-  draw(6, 2, 1);
+  time_t t = std::time(0);
+  if (t % 3 == 0)
+  {
+    draw(6, 1, 1);
+    draw(7, 1, 1);
+    draw(8, 1, 1);
+    draw(9, 1, 1);
+    last_spawned_shape_ = 'I';
+  }
+  else if (t % 3 == 1)
+  {
+    draw(7, 0, 1);
+    draw(7, 1, 1);
+    draw(8, 1, 1);
+    draw(9, 1, 1);
+    last_spawned_shape_ = 'J';
+  }
+  else if (t % 3 == 2)
+  {
+    draw(7, 0, 1);
+    draw(7, 1, 1);
+    draw(7, 2, 1);
+    draw(8, 2, 1);
+    last_spawned_shape_ = 'L';
+  }
 }
