@@ -23,6 +23,14 @@ void setup()
 void move()
 {
    int d = Serial.parseInt();
+   if (d == 4)
+   f.move("left");
+   else if (d == 6)
+   f.move("right");
+   else if (d == 2)
+   f.move("down");
+   else if (d == 8)
+   f.move("up");
 }
 
 unsigned long last = millis();
@@ -30,11 +38,7 @@ void loop()
 {
   if (Serial.available())
   {
-    int x = Serial.parseInt();
-    int y = Serial.parseInt();
-    Serial.println(x);
-    Serial.println(y);
-    f.draw(x, y, 1);
+    move();
   }
   if (millis() - last > 500)
   {
