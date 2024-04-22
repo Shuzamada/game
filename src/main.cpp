@@ -96,6 +96,7 @@ int main()
     if (std::time(nullptr) - last_move > 0.5)
     {
       f.fall();
+      std::cout << f.cur_shape << "\n";
       last_move = std::time(nullptr);
     }
 

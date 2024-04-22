@@ -165,28 +165,83 @@ void Field::block()
 void Field::spawnNew()
 {
   time_t t = std::time(0);
-  if (t % 3 == 0)
+  cur_rotate_phase = 0;
+  if (t % 7 == 0)
   {
-    draw(6, 1, 1);
-    draw(7, 1, 1);
-    draw(8, 1, 1);
-    draw(9, 1, 1);
-    last_spawned_shape_ = 'I';
+    draw(6, 3, 1);
+    draw(7, 3, 1);
+    draw(8, 3, 1);
+    draw(9, 3, 1);
+    cur_shape = 'I';
+    cur_shape_centre[0] = 0;
+    cur_shape_centre[1] = 0;
   }
-  else if (t % 3 == 1)
+  else if (t % 7 == 1)
   {
-    draw(7, 0, 1);
-    draw(7, 1, 1);
-    draw(8, 1, 1);
-    draw(9, 1, 1);
-    last_spawned_shape_ = 'J';
+    draw(7, 2, 1);
+    draw(7, 3, 1);
+    draw(8, 3, 1);
+    draw(9, 3, 1);
+    cur_shape = 'J';
+    cur_shape_centre[0] = 8;
+    cur_shape_centre[1] = 3;
   }
-  else if (t % 3 == 2)
+  else if (t % 7 == 2)
   {
-    draw(7, 0, 1);
-    draw(7, 1, 1);
+    draw(6, 3, 1);
+    draw(7, 3, 1);
+    draw(8, 3, 1);
+    draw(8, 2, 1);
+    cur_shape = 'L';
+    cur_shape_centre[0] = 8;
+    cur_shape_centre[1] = 3;
+  }
+  else if (t % 7 == 3)
+  {
+    draw(7, 3, 1);
+    draw(7, 2, 1);
+    draw(8, 3, 1);
+    draw(8, 2, 1);
+    cur_shape = 'O';
+    cur_shape_centre[0] = 0;
+    cur_shape_centre[1] = 0;
+  }
+  else if (t % 7 == 4)
+  {
     draw(7, 2, 1);
     draw(8, 2, 1);
-    last_spawned_shape_ = 'L';
+    draw(7, 3, 1);
+    draw(6, 3, 1);
+    cur_shape = 'S';
+    cur_shape_centre[0] = 7;
+    cur_shape_centre[1] = 3;
+  }
+  else if (t % 7 == 5)
+  {
+    draw(6, 2, 1);
+    draw(7, 2, 1);
+    draw(8, 2, 1);
+    draw(7, 3, 1);
+    cur_shape = 'T';
+    cur_shape_centre[0] = 7;
+    cur_shape_centre[1] = 2;
+  }
+  else if (t % 7 == 6)
+  {
+    draw(6, 2, 1);
+    draw(7, 2, 1);
+    draw(7, 3, 1);
+    draw(8, 3, 1);
+    cur_shape = 'Z';
+    cur_shape_centre[0] = 7;
+    cur_shape_centre[1] = 3;
+  }
+}
+
+void Field::rotate()
+{
+  if (cur_shape == 'J')
+  {
+
   }
 }

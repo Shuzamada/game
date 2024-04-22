@@ -10,13 +10,16 @@ class Field
     bool checkLight(char x, char y);
     void move(std::string str);
     void fall();
-  private:
+  //private:
     void checkBlock();
     void block();
     void spawnNew();
     bool field[16][20][2] = {};
     char identifyShape();
-    char last_spawned_shape_ = 'J';
+    void rotate();
+    char cur_shape = 'J';
+    char cur_shape_centre[2] = {};
+    char cur_rotate_phase = 0;
 };
 
 #endif
