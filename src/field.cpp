@@ -16,6 +16,7 @@ bool Field::checkLight(char x, char y)
 
 void Field::move(std::string str)
 {
+  bool moved = false;
   if (str == "left")
   {
     for (char i = 1; i < 16; i++)
@@ -45,6 +46,11 @@ void Field::move(std::string str)
           field[i][j][0] = 0;
           field[i-1][j][1] = 1;
           field[i][j][1] = 0;
+          if (!moved)
+          {
+            cur_shape_centre[0]--;
+          }
+          moved = true;
         }
       }
     }
@@ -78,6 +84,11 @@ void Field::move(std::string str)
           field[i][j][0] = 0;
           field[i+1][j][1] = 1;
           field[i][j][1] = 0;
+          if (!moved)
+          {
+            cur_shape_centre[0]++;
+          }
+          moved = true;
         }
       }
     }
@@ -94,6 +105,11 @@ void Field::move(std::string str)
           field[i][j][0] = 0;
           field[i][j+1][1] = 1;
           field[i][j][1] = 0;
+          if (!moved)
+          {
+            cur_shape_centre[1]++;
+          }
+          moved = true;
         }
       }
     }
@@ -110,6 +126,11 @@ void Field::move(std::string str)
           field[i][j][0] = 0;
           field[i][j-1][1] = 1;
           field[i][j][1] = 0;
+          if (!moved)
+          {
+            cur_shape_centre[1]--;
+          }
+          moved = true;
         }
       }
     }
@@ -193,7 +214,7 @@ void Field::spawnNew()
     draw(8, 3, 1);
     draw(8, 2, 1);
     cur_shape = 'L';
-    cur_shape_centre[0] = 8;
+    cur_shape_centre[0] = 7;
     cur_shape_centre[1] = 3;
   }
   else if (t % 7 == 3)
@@ -240,8 +261,34 @@ void Field::spawnNew()
 
 void Field::rotate()
 {
-  if (cur_shape == 'J')
+  if (cur_shape == 'O')
   {
-
+    return;
+  }
+  else
+  {
+    char x = cur_shape_centre[0];
+    char y = cur_shape_centre[1];
+    if (x != 0 && x != 15)
+    {
+      bool temp_x = field[x-1][y][0];
+      bool temp_y = field[x-1][y][1];
+      field[x-1][y][0] = field[x-1][y+1][0];
+      field[x-1][y][1] = field[x-1][y+1][1];
+      field[x-1][y+1][0] = field[x][y+1][0];
+      field[x-1][y+1][1] = field[x][y+1][1];
+      field[x][y+1][0] = field[x+1][y+1][0];
+      field[x][y+1][1] = field[x+1][y+1][1];
+      field[x+1][y+1][0] = field[x+1][y][0];
+      field[x+1][y+1][1] = field[x+1][y][1];
+      field[x+1][y][0] = field[x+1][y-1][0];
+      field[x+1][y][1] = field[x+1][y-1][1];
+      field[x+1][y-1][0] = field[x][y-1][0];
+      field[x+1][y-1][1] = field[x][y-1][1];
+      field[x][y-1][0] = field[x-1][y-1][0];
+      field[x][y-1][1] = field[x-1][y-1][1];
+      field[x-1][y-1][0] = temp_x;
+      field[x-1][y-1][1] = temp_y;
+    }
   }
 }

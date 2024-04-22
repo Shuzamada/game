@@ -35,7 +35,11 @@ void draw(sf::RenderWindow& window, Field& f)
       if (f.checkLight(i, j))
       {
         sf::RectangleShape rectangle(sf::Vector2f(cell_size - 5, cell_size - 5));
-        if (j < 4)
+        if (i == f.cur_shape_centre[0] && j == f.cur_shape_centre[1])
+        {
+          rectangle.setFillColor(sf::Color::Yellow);
+        }
+        else if (j < 4)
         {
           rectangle.setFillColor(sf::Color::Green);
         }
@@ -55,11 +59,7 @@ int main()
 {
   Field f;
 
-  f.draw(4, 3, 1);
-  f.draw(4, 4, 1);
-  f.draw(5, 4, 1);
-  f.draw(6, 4, 1);
-  //f.draw(6, 5, 1);
+  f.spawnNew();
 
   sf::RenderWindow window(sf::VideoMode(1200, 1200), "test");
   std::time_t last_move = std::time(nullptr);
@@ -92,11 +92,16 @@ int main()
         std::cout << "pressed Up\n";
         f.move("up");
       }
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+      {
+        std::cout << "pressed Space\n";
+        f.rotate();
+      }
     }
     if (std::time(nullptr) - last_move > 0.5)
     {
       f.fall();
-      std::cout << f.cur_shape << "\n";
+      std::cout << f.cur_shape_centre[0] << " "  << f.cur_shape << " " << f.cur_shape_centre[1] << "\n";
       last_move = std::time(nullptr);
     }
 

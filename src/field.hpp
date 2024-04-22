@@ -18,7 +18,7 @@ class Field
     char identifyShape();
     void rotate();
     char cur_shape = 'J';
-    char cur_shape_centre[2] = {};
+    int cur_shape_centre[2] = {};
     char cur_rotate_phase = 0;
 };
 
