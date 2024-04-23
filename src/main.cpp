@@ -72,35 +72,37 @@ int main()
       {
         window.close();
       }
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
       {
         std::cout << "pressed Left\n";
         f.move("left");
       }
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
       {
         std::cout << "pressed Right\n";
         f.move("right");
       }
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
       {
         std::cout << "pressed Down\n";
         f.move("down");
       }
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
       {
         std::cout << "pressed Up\n";
-        f.move("up");
+        //f.move("up");
+        f.rotate();
       }
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
       {
-        std::cout << "pressed Space\n";
+        std::cout << "pressed Enter\n";
         f.rotate();
       }
     }
     if (std::time(nullptr) - last_move > 0.5)
     {
       f.fall();
+      //f.rotate();
       std::cout << f.cur_shape_centre[0] << " "  << f.cur_shape << " " << f.cur_shape_centre[1] << "\n";
       last_move = std::time(nullptr);
     }
