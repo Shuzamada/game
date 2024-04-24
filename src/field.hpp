@@ -11,12 +11,7 @@ class Field
     void move(std::string str);
     void fall();
   //private:
-    void checkBlock();
-    void block();
-    void spawnNew();
     bool field[16][20][2] = {};
-    char identifyShape();
-    void rotate();
     void clear();
     char cur_shape = 'J';
     int cur_shape_centre[2] = {};

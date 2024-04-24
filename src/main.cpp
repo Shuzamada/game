@@ -1,4 +1,4 @@
-#include <ctime>
+#include <chrono>
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
@@ -59,10 +59,16 @@ int main()
 {
   Field f;
 
-  f.spawnNew();
+  f.draw(2,1,1);
+  f.draw(1,2,1);
+  f.draw(1,1,1);
+  f.draw(1,1,1);
+  f.draw(3,4,1);
+  f.draw(2,2,1);
+  f.draw(1,3,1);
 
   sf::RenderWindow window(sf::VideoMode(1200, 1200), "test");
-  std::time_t last_move = std::time(nullptr);
+  std::chrono::milliseconds last_move = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch());
   while (window.isOpen())
   {
     sf::Event event;
@@ -90,21 +96,18 @@ int main()
       else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
       {
         std::cout << "pressed Up\n";
-        //f.move("up");
-        f.rotate();
+        f.move("up");
       }
       else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
       {
         std::cout << "pressed Enter\n";
-        f.rotate();
+        f.draw(5,1,1);
       }
     }
-    if (std::time(nullptr) - last_move > 0.5)
+    if (std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch()) - last_move > std::chrono::milliseconds(20))
     {
-      f.fall();
-      //f.rotate();
-      std::cout << f.cur_shape_centre[0] << " "  << f.cur_shape << " " << f.cur_shape_centre[1] << "\n";
-      last_move = std::time(nullptr);
+      //f.fall();
+      last_move = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch());
     }
 
     window.clear();
