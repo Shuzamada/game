@@ -102,11 +102,19 @@ int main()
       {
         std::cout << "pressed Enter\n";
         f.draw(5,1,1);
+        f.draw(6,1,1);
+        f.draw(7,1,1);
+        f.draw(5,2,1);
+        f.draw(6,2,1);
+        f.draw(7,2,1);
+        f.draw(5,3,1);
+        f.draw(6,3,1);
+        f.draw(7,3,1);
       }
     }
     if (std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch()) - last_move > std::chrono::milliseconds(20))
     {
-      //f.fall();
+      f.fall();
       last_move = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch());
     }
 

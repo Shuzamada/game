@@ -84,11 +84,49 @@ void Field::move(std::string str)
       }
     }
   }
+  else if (str == "down_left")
+  {
+    for (char i = 1; i < 16; i++)
+    {
+      for (char j = 0; j < 19; j++)
+      {
+        if (field[i][j][1] && !field[i-1][j+1][0] && !field[i-1][j+1][1] && field[i][j+1][1])
+        {
+          field[i-1][j+1][0] = 1;
+          field[i][j][0] = 0;
+          field[i-1][j+1][1] = 1;
+          field[i][j][1] = 0;
+          j++;
+          i--;
+        }
+      }
+    }
+  }
+  else if (str == "down_right")
+  {
+    for (char i = 0; i < 16; i++)
+    {
+      for (char j = 0; j < 19; j++)
+      {
+        if (field[i][j][1] && !field[i+1][j+1][0] && !field[i+1][j+1][1] && field[i][j+1][1])
+        {
+          field[i+1][j+1][0] = 1;
+          field[i][j][0] = 0;
+          field[i+1][j+1][1] = 1;
+          field[i][j][1] = 0;
+          j++;
+          i++;
+        }
+      }
+    }
+  }
 }
 
 void Field::fall()
 {
   move("down");
+  move("down_left");
+  move("down_right");
 }
 
 

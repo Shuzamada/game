@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/sembi/Arduino/tetris/src/field.cpp
-field.hpp
 /home/sembi/Arduino/tetris/src/field.hpp
 string
+-
+
+/home/sembi/Arduino/tetris/src/main.cpp
+chrono
 -
 iostream
 -
-ctime
+SFML/Graphics.hpp
 -
-
+field.hpp
 /home/sembi/Arduino/tetris/src/field.hpp
-string
--
 
