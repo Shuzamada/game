@@ -1,6 +1,7 @@
 #include <chrono>
 #include <iostream>
 
+#include "SliderSFML.h"
 #include <SFML/Graphics.hpp>
 
 #include "field.hpp"
@@ -57,6 +58,10 @@ void draw(sf::RenderWindow& window, Field& f)
 
 int main()
 {
+  SliderSFML slider(600, 100);
+  slider.create(0, 360);
+  slider.setSliderValue(180);
+
   Field f;
 
   f.draw(2,1,1);
@@ -101,6 +106,11 @@ int main()
       else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
       {
         std::cout << "pressed Enter\n";
+        f.fall();
+      }
+      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+      {
+        std::cout << "pressed Space\n";
         f.draw(5,1,1);
         f.draw(6,1,1);
         f.draw(7,1,1);
@@ -114,13 +124,15 @@ int main()
     }
     if (std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch()) - last_move > std::chrono::milliseconds(20))
     {
-      f.fall();
+      //f.fall();
       last_move = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch());
+      std::cout << slider.sliderValue<< '\n';
     }
 
     window.clear();
     drawBaseField(window);
     draw(window, f);
+    slider.draw(window);
     window.display();
   }
 

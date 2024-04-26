@@ -76,9 +76,22 @@ include CMakeFiles/MySFMLProject.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MySFMLProject.dir/flags.make
 
+CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o: CMakeFiles/MySFMLProject.dir/flags.make
+CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o: src/Slider-SFML/SliderSFML.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o -c /home/sembi/Arduino/tetris/src/Slider-SFML/SliderSFML.cpp
+
+CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sembi/Arduino/tetris/src/Slider-SFML/SliderSFML.cpp > CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.i
+
+CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sembi/Arduino/tetris/src/Slider-SFML/SliderSFML.cpp -o CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.s
+
 CMakeFiles/MySFMLProject.dir/src/field.cpp.o: CMakeFiles/MySFMLProject.dir/flags.make
 CMakeFiles/MySFMLProject.dir/src/field.cpp.o: src/field.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MySFMLProject.dir/src/field.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MySFMLProject.dir/src/field.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MySFMLProject.dir/src/field.cpp.o -c /home/sembi/Arduino/tetris/src/field.cpp
 
 CMakeFiles/MySFMLProject.dir/src/field.cpp.i: cmake_force
@@ -91,7 +104,7 @@ CMakeFiles/MySFMLProject.dir/src/field.cpp.s: cmake_force
 
 CMakeFiles/MySFMLProject.dir/src/main.cpp.o: CMakeFiles/MySFMLProject.dir/flags.make
 CMakeFiles/MySFMLProject.dir/src/main.cpp.o: src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MySFMLProject.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MySFMLProject.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MySFMLProject.dir/src/main.cpp.o -c /home/sembi/Arduino/tetris/src/main.cpp
 
 CMakeFiles/MySFMLProject.dir/src/main.cpp.i: cmake_force
@@ -104,12 +117,14 @@ CMakeFiles/MySFMLProject.dir/src/main.cpp.s: cmake_force
 
 # Object files for target MySFMLProject
 MySFMLProject_OBJECTS = \
+"CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o" \
 "CMakeFiles/MySFMLProject.dir/src/field.cpp.o" \
 "CMakeFiles/MySFMLProject.dir/src/main.cpp.o"
 
 # External object files for target MySFMLProject
 MySFMLProject_EXTERNAL_OBJECTS =
 
+MySFMLProject: CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o
 MySFMLProject: CMakeFiles/MySFMLProject.dir/src/field.cpp.o
 MySFMLProject: CMakeFiles/MySFMLProject.dir/src/main.cpp.o
 MySFMLProject: CMakeFiles/MySFMLProject.dir/build.make
@@ -118,7 +133,7 @@ MySFMLProject: /usr/lib/x86_64-linux-gnu/libsfml-audio.so.2.5.1
 MySFMLProject: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
 MySFMLProject: /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
 MySFMLProject: CMakeFiles/MySFMLProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable MySFMLProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable MySFMLProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MySFMLProject.dir/link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Запуск MySFMLProject"
 	./MySFMLProject

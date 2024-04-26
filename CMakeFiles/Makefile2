@@ -100,7 +100,7 @@ CMakeFiles/run.dir/all: CMakeFiles/MySFMLProject.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/run.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sembi/Arduino/tetris/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sembi/Arduino/tetris/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sembi/Arduino/tetris/CMakeFiles 0
 .PHONY : CMakeFiles/run.dir/rule
@@ -122,12 +122,12 @@ CMakeFiles/run.dir/clean:
 CMakeFiles/MySFMLProject.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MySFMLProject.dir/build.make CMakeFiles/MySFMLProject.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MySFMLProject.dir/build.make CMakeFiles/MySFMLProject.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=1,2,3 "Built target MySFMLProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sembi/Arduino/tetris/CMakeFiles --progress-num=1,2,3,4 "Built target MySFMLProject"
 .PHONY : CMakeFiles/MySFMLProject.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MySFMLProject.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sembi/Arduino/tetris/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sembi/Arduino/tetris/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/MySFMLProject.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sembi/Arduino/tetris/CMakeFiles 0
 .PHONY : CMakeFiles/MySFMLProject.dir/rule

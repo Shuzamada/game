@@ -5,6 +5,7 @@ cmake_policy(SET CMP0009 NEW)
 # SOURCES at CMakeLists.txt:14 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/sembi/Arduino/tetris/src/*.cpp")
 set(OLD_GLOB
+  "/home/sembi/Arduino/tetris/src/Slider-SFML/SliderSFML.cpp"
   "/home/sembi/Arduino/tetris/src/field.cpp"
   "/home/sembi/Arduino/tetris/src/main.cpp"
   )
@@ -16,6 +17,7 @@ endif()
 # HEADERS at CMakeLists.txt:17 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/sembi/Arduino/tetris/src/*.h")
 set(OLD_GLOB
+  "/home/sembi/Arduino/tetris/src/Slider-SFML/SliderSFML.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

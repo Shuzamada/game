@@ -104,7 +104,7 @@ void Field::move(std::string str)
   }
   else if (str == "down_right")
   {
-    for (char i = 0; i < 16; i++)
+    for (char i = 0; i < 15; i++)
     {
       for (char j = 0; j < 19; j++)
       {

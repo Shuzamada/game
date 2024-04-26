@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o"
   "CMakeFiles/MySFMLProject.dir/src/field.cpp.o"
   "CMakeFiles/MySFMLProject.dir/src/main.cpp.o"
   "MySFMLProject"

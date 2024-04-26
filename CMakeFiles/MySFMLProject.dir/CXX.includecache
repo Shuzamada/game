@@ -15,8 +15,16 @@ chrono
 -
 iostream
 -
+SliderSFML.h
+/home/sembi/Arduino/tetris/src/SliderSFML.h
 SFML/Graphics.hpp
 -
 field.hpp
 /home/sembi/Arduino/tetris/src/field.hpp
+
+src/Slider-SFML/SliderSFML.h
+SFML/Graphics.hpp
+-
+iostream
+-
 

@@ -156,6 +156,33 @@ MySFMLProject/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MySFMLProject.dir/build.make CMakeFiles/MySFMLProject.dir/build
 .PHONY : MySFMLProject/fast
 
+src/Slider-SFML/SliderSFML.o: src/Slider-SFML/SliderSFML.cpp.o
+
+.PHONY : src/Slider-SFML/SliderSFML.o
+
+# target to build an object file
+src/Slider-SFML/SliderSFML.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MySFMLProject.dir/build.make CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.o
+.PHONY : src/Slider-SFML/SliderSFML.cpp.o
+
+src/Slider-SFML/SliderSFML.i: src/Slider-SFML/SliderSFML.cpp.i
+
+.PHONY : src/Slider-SFML/SliderSFML.i
+
+# target to preprocess a source file
+src/Slider-SFML/SliderSFML.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MySFMLProject.dir/build.make CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.i
+.PHONY : src/Slider-SFML/SliderSFML.cpp.i
+
+src/Slider-SFML/SliderSFML.s: src/Slider-SFML/SliderSFML.cpp.s
+
+.PHONY : src/Slider-SFML/SliderSFML.s
+
+# target to generate assembly for a file
+src/Slider-SFML/SliderSFML.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MySFMLProject.dir/build.make CMakeFiles/MySFMLProject.dir/src/Slider-SFML/SliderSFML.cpp.s
+.PHONY : src/Slider-SFML/SliderSFML.cpp.s
+
 src/field.o: src/field.cpp.o
 
 .PHONY : src/field.o
@@ -220,6 +247,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... run"
 	@echo "... MySFMLProject"
+	@echo "... src/Slider-SFML/SliderSFML.o"
+	@echo "... src/Slider-SFML/SliderSFML.i"
+	@echo "... src/Slider-SFML/SliderSFML.s"
 	@echo "... src/field.o"
 	@echo "... src/field.i"
 	@echo "... src/field.s"
