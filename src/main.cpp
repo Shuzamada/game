@@ -36,11 +36,7 @@ void draw(sf::RenderWindow& window, Field& f)
       if (f.checkLight(i, j))
       {
         sf::RectangleShape rectangle(sf::Vector2f(cell_size - 5, cell_size - 5));
-        if (i == f.cur_shape_centre[0] && j == f.cur_shape_centre[1])
-        {
-          rectangle.setFillColor(sf::Color::Yellow);
-        }
-        else if (j < 4)
+        if (j < 4)
         {
           rectangle.setFillColor(sf::Color::Green);
         }
@@ -53,6 +49,26 @@ void draw(sf::RenderWindow& window, Field& f)
       }
     }
   }
+}
+
+void drawForceVector(sf::RenderWindow& window, float angle)
+{
+  angle += 90;
+  sf::ConvexShape arrow(7);
+  arrow.setPoint(0, sf::Vector2f(-50, 0));
+  arrow.setPoint(1, sf::Vector2f(0, -10));
+  arrow.setPoint(2, sf::Vector2f(0, -5));
+  arrow.setPoint(3, sf::Vector2f(50, -5));
+  arrow.setPoint(4, sf::Vector2f(50, 5));
+  arrow.setPoint(5, sf::Vector2f(0, 5));
+  arrow.setPoint(6, sf::Vector2f(0, 10));
+  arrow.setFillColor(sf::Color::Red);
+  arrow.setOutlineColor(sf::Color::Black);
+  arrow.setOutlineThickness(1);
+  arrow.setOrigin(0, 0);
+  arrow.setPosition(270, 300);
+  arrow.setRotation(angle);
+  window.draw(arrow);
 }
 
 
@@ -97,42 +113,44 @@ int main()
       {
         std::cout << "pressed Down\n";
         f.move("down");
+        //f.fall(slider.sliderValue);
       }
       else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
       {
         std::cout << "pressed Up\n";
         f.move("up");
       }
-      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-      {
-        std::cout << "pressed Enter\n";
-        f.fall();
-      }
       else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       {
         std::cout << "pressed Space\n";
+        f.fall(slider.sliderValue);
+      }
+      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+      {        
+        std::cout << "pressed Enter\n";
         f.draw(5,1,1);
-        f.draw(6,1,1);
-        f.draw(7,1,1);
-        f.draw(5,2,1);
-        f.draw(6,2,1);
-        f.draw(7,2,1);
-        f.draw(5,3,1);
-        f.draw(6,3,1);
-        f.draw(7,3,1);
+        // f.draw(6,1,1);
+        // f.draw(7,1,1);
+        // f.draw(5,2,1);
+        // f.draw(6,2,1);
+        // f.draw(7,2,1);
+        // f.draw(5,3,1);
+        // f.draw(6,3,1);
+        // f.draw(7,3,1);
       }
     }
     if (std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch()) - last_move > std::chrono::milliseconds(20))
     {
-      //f.fall();
+      //f.fall(slider.sliderValue);
       last_move = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch());
-      std::cout << slider.sliderValue<< '\n';
+      //std::cout << slider.sliderValue << '\n';
     }
 
     window.clear();
     drawBaseField(window);
     draw(window, f);
     slider.draw(window);
+    drawForceVector(window, slider.sliderValue);
     window.display();
   }
 
