@@ -1,4 +1,0 @@
-/home/sembi/Arduino/tetris/CMakeFiles/rebuild_cache.dir
-/home/sembi/Arduino/tetris/CMakeFiles/edit_cache.dir
-/home/sembi/Arduino/tetris/CMakeFiles/run.dir
-/home/sembi/Arduino/tetris/CMakeFiles/MySFMLProject.dir
