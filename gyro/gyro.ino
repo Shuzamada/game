@@ -44,9 +44,7 @@ void loop() {
   TotalYangle = alpha * GyroYangle + (1 - alpha) * AccYangle;
 
   Serial.print("X-Angle: ");
-  Serial.print(TotalXangle);
-  Serial.print("\t Y-Angle: ");
-  Serial.println(TotalYangle);
+  Serial.println(TotalXangle + 180);
   timer = millis();
   delay(100);
 }

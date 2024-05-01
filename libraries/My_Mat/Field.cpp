@@ -7,385 +7,253 @@ void Field::draw(char x, char y, bool c)
   field[x][y][1] = c;
 }
 
-bool Field::checkLight(char x, char y) const
+bool Field::checkLight(char x, char y)
 {
+  if (x >= length or y >= height or x < 0 or y < 0)
+  {
+    return true;
+  }
   return field[x][y][0];
+}
+
+bool Field::checkMoveable(char x, char y)
+{
+  if (x >= length or y >= height or x < 0 or y < 0)
+  {
+    return false;
+  }
+  return field[x][y][1];
 }
 
 void Field::move(String str)
 {
-  bool moved = false;
-  if (str == "left")
+  if (str == "down")
   {
-    for (char i = 1; i < 16; i++)
+    for (char i = 0; i < length; i++)
     {
-      for (char j = 0; j < 20; j++)
+      for (char j = 0; j < height; j++)
       {
-        if (field[i][j][1] && field[i-1][j][0])
+        if (checkMoveable(i, j) && !checkLight(i, j + 1))
         {
-          break;
+          draw(i, j, 0);
+          draw(i, j + 1, 1);
+          j++;
         }
-        if (field[i][j][1] && !field[i-1][j][0])
+      }
+    }
+  }
+  else if (str == "down_left")
+  {
+    for (char j = height; j >= 0; j--)
+    {
+      for (char i = 0; i < length; i++)
+      {
+        if (checkMoveable(i, j) && checkLight(i , j + 1) && !checkLight(i - 1, j + 1))
         {
-          bool can_move_left = true;
-          for (char l = 0; l < 20; l++)
-          {
-            if (field[i][l][1] && field[i-1][l][0])
-            {
-              can_move_left = false;
-              break;
-            }
-          }
-          if (!can_move_left)
-          {
-            break;
-          }
-          field[i-1][j][0] = 1;
-          field[i][j][0] = 0;
-          field[i-1][j][1] = 1;
-          field[i][j][1] = 0;
-          if (!moved)
-          {
-            cur_shape_centre[0]--;
-          }
-          moved = true;
+          draw(i, j, 0);
+          draw(i - 1, j + 1, 1);
+        }
+      }
+    }
+  }
+  else if (str == "down_right")
+  {
+    for (char j = 0; j < height; j++)
+    {
+      for (char i = length; i >= 0; i--)
+      {
+        if (checkMoveable(i, j) && checkLight(i , j + 1) && !checkLight(i + 1, j + 1))
+        {
+          draw(i, j, 0);
+          draw(i + 1, j + 1, 1);
+          j++;
+        }
+      }
+    }
+  }
+  else if (str == "left")
+  {
+    for (char j = 0; j < height; j++)
+    {
+      for (char i = length - 1; i >= 0; i--)
+      {
+        if (checkMoveable(i, j) && !checkLight(i - 1, j))
+        {
+          draw(i, j, 0);
+          draw(i - 1, j, 1);
+          i--;
+        }
+      }
+    }
+  }
+  else if (str == "left_down")
+  {
+    for (char i = 0; i < length; i++)
+    {
+      for (char j = 0; j < height; j++)
+      {
+        if (checkMoveable(i, j) && checkLight(i - 1, j) && !checkLight(i - 1, j + 1))
+        {
+          draw(i, j, 0);
+          draw(i - 1, j + 1, 1);
+        }
+      }
+    }
+  }
+  else if (str == "left_up")
+  {
+    for (char i = 0; i < length; i++)
+    {
+      for (char j = 0; j < height; j++)
+      {
+        if (checkMoveable(i, j) && checkLight(i - 1, j) && !checkLight(i - 1, j - 1))
+        {
+          draw(i, j, 0);
+          draw(i - 1, j - 1, 1);
         }
       }
     }
   }
   else if (str == "right")
   {
-    for (char i = 14; i >= 0; i--)
+    for (char j = 0; j < height; j++)
     {
-      for (char j = 0; j < 20; j++)
+      for (char i = 0 ; i < length - 1; i++)
       {
-        if (field[i][j][1] && field[i+1][j][0])
+        if (checkMoveable(i, j) && !checkLight(i + 1, j))
         {
-          break;
-        }
-        if (field[i][j][1] && !field[i+1][j][0])
-        {
-          bool can_move_right = true;
-          for (char l = 0; l < 20; l++)
-          {
-            if (field[i][l][1] && field[i+1][l][0])
-            {
-              can_move_right = false;
-              break;
-            }
-          }
-          if (!can_move_right)
-          {
-            break;
-          }
-          field[i+1][j][0] = 1;
-          field[i][j][0] = 0;
-          field[i+1][j][1] = 1;
-          field[i][j][1] = 0;
-          if (!moved)
-          {
-            cur_shape_centre[0]++;
-          }
-          moved = true;
+          draw(i, j, 0);
+          draw(i + 1, j, 1);
+          i++;
         }
       }
     }
   }
-  else if (str == "down")
+  else if (str == "right_down")
   {
-    for (char i = 0; i < 16; i++)
+    for (char i = length; i > 0; i--)
     {
-      for (char j = 18; j >= 0; j--)
+      for (char j = 0; j < height; j++)
       {
-        if (field[i][j][1] && !field[i][j+1][0])
+        if (checkMoveable(i, j) && checkLight(i + 1, j) && !checkLight(i + 1, j + 1))
         {
-          field[i][j+1][0] = 1;
-          field[i][j][0] = 0;
-          field[i][j+1][1] = 1;
-          field[i][j][1] = 0;
-          if (!moved)
-          {
-            cur_shape_centre[1]++;
-          }
-          moved = true;
+          draw(i, j, 0);
+          draw(i + 1, j + 1, 1);
+        }
+      }
+    }
+  }
+  else if (str == "right_up")
+  {
+    for (char i = length; i > 0; i--)
+    {
+      for (char j = 0; j < height; j++)
+      {
+        if (checkMoveable(i, j) && checkLight(i + 1, j) && !checkLight(i + 1, j - 1))
+        {
+          draw(i, j, 0);
+          draw(i + 1, j - 1, 1);
         }
       }
     }
   }
   else if (str == "up")
   {
-    for (char i = 0; i < 16; i++)
+    for (char i = 0; i < length; i++)
     {
-      for (char j = 1; j < 20; j++)
+      for (char j = height - 1; j >= 0 ; j--)
       {
-        if (field[i][j][0] && field[i][j][1] && !field[i][j-1][0])
+        if (checkMoveable(i, j) && !checkLight(i, j - 1))
         {
-          field[i][j-1][0] = 1;
-          field[i][j-1][1] = 1;
-          field[i][j][0] = 0;
-          field[i][j][1] = 0;
-          if (!moved)
-          {
-            cur_shape_centre[1]--;
-          }
-          moved = true;
+          draw(i, j, 0);
+          draw(i, j - 1, 1);
+          j--;
         }
       }
     }
   }
-  checkBlock();
-}
-
-void Field::fall()
-{
-  move("down");
-  checkBlock();
-}
-
-void Field::checkBlock()
-{
-  bool blocked = false;
-  for (int i = 0; i < 16; i++)
+  else if (str == "up_left")
   {
-    for (int j = 1; j < 20; j++)
+    for (char j = 0; j < height; j++)
     {
-      if (field[i][j][1] && j == 19)
+      for (char i = length; i > 0; i--)
       {
-        block();
-        blocked = true;
-      }
-      else if (field[i][j][1] && field[i][j+1][0] && !field[i][j+1][1])
-      {
-        block();
-        blocked = true;
-      }
-    }
-  }
-  if (blocked)
-  {
-    spawnNew();
-  }
-}
-
-void Field::block()
-{
-  for (int i = 0; i < 16; i++)
-  {
-    for (int j = 1; j < 20; j++)
-    {
-      field[i][j][1] = 0;
-    }
-  }
-}
-  // f.draw(4, 3, 1);
-  // f.draw(4, 4, 1);
-  // f.draw(5, 4, 1);
-  // f.draw(6, 4, 1);
-void Field::spawnNew()
-{
-  clear();
-  unsigned long t = millis();
-  if (t % 7 == 0)
-  {
-    draw(6, 3, 1);
-    draw(7, 3, 1);
-    draw(8, 3, 1);
-    draw(9, 3, 1);
-    cur_shape = 'I';
-    cur_rotate_phase = 0;
-    cur_shape_centre[0] = 7;
-    cur_shape_centre[1] = 3;
-  }
-  else if (t % 7 == 1)
-  {
-    draw(7, 2, 1);
-    draw(7, 3, 1);
-    draw(8, 3, 1);
-    draw(9, 3, 1);
-    cur_shape = 'J';
-    cur_shape_centre[0] = 8;
-    cur_shape_centre[1] = 3;
-  }
-  else if (t % 7 == 2)
-  {
-    draw(6, 3, 1);
-    draw(7, 3, 1);
-    draw(8, 3, 1);
-    draw(8, 2, 1);
-    cur_shape = 'L';
-    cur_shape_centre[0] = 7;
-    cur_shape_centre[1] = 3;
-  }
-  else if (t % 7 == 3)
-  {
-    draw(7, 3, 1);
-    draw(7, 2, 1);
-    draw(8, 3, 1);
-    draw(8, 2, 1);
-    cur_shape = 'O';
-    cur_shape_centre[0] = 0;
-    cur_shape_centre[1] = 0;
-  }
-  else if (t % 7 == 4)
-  {
-    draw(7, 2, 1);
-    draw(8, 2, 1);
-    draw(7, 3, 1);
-    draw(6, 3, 1);
-    cur_shape = 'S';
-    cur_shape_centre[0] = 7;
-    cur_shape_centre[1] = 3;
-  }
-  else if (t % 7 == 5)
-  {
-    draw(6, 2, 1);
-    draw(7, 2, 1);
-    draw(8, 2, 1);
-    draw(7, 3, 1);
-    cur_shape = 'T';
-    cur_shape_centre[0] = 7;
-    cur_shape_centre[1] = 2;
-  }
-  else if (t % 7 == 6)
-  {
-    draw(6, 2, 1);
-    draw(7, 2, 1);
-    draw(7, 3, 1);
-    draw(8, 3, 1);
-    cur_shape = 'Z';
-    cur_shape_centre[0] = 7;
-    cur_shape_centre[1] = 3;
-  }
-}
-
-void Field::rotate()
-{
-  if (cur_shape == 'O')
-  {
-    return;
-  }
-
-  char x = cur_shape_centre[0];
-  char y = cur_shape_centre[1];
-  if (cur_shape == 'I')
-  {
-    if (cur_rotate_phase == 0)
-    {
-      if (!field[x][y+1][0] && !field[x][y+2][0] && y < 18)
-      {
-        draw(x, y+1, 1);
-        draw(x, y+2, 1);
-        draw(x, y-1, 1);
-        draw(x+1, y, 0);
-        draw(x+2, y, 0);
-        draw(x-1, y, 0);
-        cur_rotate_phase = 1;
-      }
-    }
-    else if (cur_rotate_phase == 1)
-    {
-      if (!field[x+1][y][0] && !field[x+2][y][0] && x > 1 && x < 15)
-      {
-        draw(x-1, y, 1);
-        draw(x-2, y, 1);
-        draw(x+1, y, 1);
-        draw(x, y+1, 0);
-        draw(x, y+2, 0);
-        draw(x, y-1, 0);
-        cur_rotate_phase = 2;
-      }
-    }
-    else if (cur_rotate_phase == 2)
-    {
-      if (!field[x][y-1][0] && !field[x][y-2][0] && y < 19)
-      {
-        draw(x, y-1, 1);
-        draw(x, y-2, 1);
-        draw(x, y+1, 1);
-        draw(x-1, y, 0);
-        draw(x-2, y, 0);
-        draw(x+1, y, 0);
-        cur_rotate_phase = 3;
-      }
-    }
-    else if (cur_rotate_phase == 3)
-    {
-      if (!field[x+1][y][0] && !field[x+2][y][0] && x < 14 && x > 0)
-      {
-        draw(x+1, y, 1);
-        draw(x+2, y, 1);
-        draw(x-1, y, 1);
-        draw(x, y-1, 0);
-        draw(x, y-2, 0);
-        draw(x, y+1, 0);
-        cur_rotate_phase = 0;
-      }
-    }
-    return;
-  }
-  else
-  {
-    if (x != 0 && x != 15)
-    {
-      char count_movable = 0;
-      for (char i = 0; i < 3; i++)
-      {
-        for (char j = 0; j < 3; j++)
+        if (checkMoveable(i, j) && checkLight(i, j - 1) && !checkLight(i - 1, j - 1))
         {
-          count_movable += field[x+i-1][y+j-1][0];
-        }
-      }
-      if (count_movable != 4)
-      {
-        return;
-      }
-      for (char i = 0; i < 2; i++)
-      {
-        bool temp_x = field[x-1][y][0];
-        bool temp_y = field[x-1][y][1];
-        field[x-1][y][0] = field[x-1][y+1][0];
-        field[x-1][y][1] = field[x-1][y+1][1];
-        field[x-1][y+1][0] = field[x][y+1][0];
-        field[x-1][y+1][1] = field[x][y+1][1];
-        field[x][y+1][0] = field[x+1][y+1][0];
-        field[x][y+1][1] = field[x+1][y+1][1];
-        field[x+1][y+1][0] = field[x+1][y][0];
-        field[x+1][y+1][1] = field[x+1][y][1];
-        field[x+1][y][0] = field[x+1][y-1][0];
-        field[x+1][y][1] = field[x+1][y-1][1];
-        field[x+1][y-1][0] = field[x][y-1][0];
-        field[x+1][y-1][1] = field[x][y-1][1];
-        field[x][y-1][0] = field[x-1][y-1][0];
-        field[x][y-1][1] = field[x-1][y-1][1];
-        field[x-1][y-1][0] = temp_x;
-        field[x-1][y-1][1] = temp_y;
-      }
-    }
-  }
-}
-
-void Field::clear()
-{
-  for (char y = 0; y < 20; y++)
-  {
-    bool need_clear = true;
-    for (char x = 0; x < 16; x++)
-    {
-      if (!field[x][y][0])
-      {
-        need_clear = false;
-        break;
-      }
-    }
-    if (need_clear)
-    {
-      for (char i = y; i > 0; i--)
-      {
-        for (char j = 0; j < 16; j++)
-        {
-          field[j][i][0] = field[j][i-1][0];
+          draw(i, j, 0);
+          draw(i - 1, j - 1, 1);
         }
       }
     }
+  }
+  else if (str == "up_right")
+  {
+    for (char j = 0; j < height; j++)
+    {
+      for (char i = 0; i < length; i++)
+      {
+        if (checkMoveable(i, j) && checkLight(i, j - 1) && !checkLight(i + 1, j - 1))
+        {
+          draw(i, j, 0);
+          draw(i + 1, j - 1, 1);
+        }
+      }
+    }
+  }
+}
+
+void Field::fall(float angle)
+{
+  if (angle > 360 - 22.5 || angle < 22.5)
+  {
+    move("up");
+    move("up_left");
+    move("up_right");
+  }
+  if (angle > 45 - 22.5 && angle < 45 + 22.5)
+  {
+    move("right_up");
+    move("up_right");
+    move("up");
+    move("right");
+  }
+  if (angle > 90 - 22.5 && angle < 90 + 22.5)
+  {
+    move("right");
+    move("right_down");
+    move("right_up");
+  }
+  if (angle > 135 - 22.5 && angle < 135 + 22.5)
+  {
+    move("down_right");
+    move("right_down");
+    move("down");
+    move("right");
+  }
+  if (angle > 180 - 22.5 && angle < 180 + 22.5)
+  {
+    move("down");
+    move("down_left");
+    move("down_right");
+  }
+  if (angle > 225 - 22.5 && angle < 225 + 22.5)
+  {
+    move("down_left");
+    move("left_down");
+    move("down");
+    move("left");
+  }
+  if (angle > 270 - 22.5 && angle < 270 + 22.5)
+  {
+    move("left");
+    move("left_up");
+    move("left_down");
+  }
+  if (angle > 315 - 22.5 && angle < 315 + 22.5)
+  {
+    move("left_up");
+    move("up_left");
+    move("left");
+    move("up");
   }
 }

@@ -7,20 +7,13 @@ class Field
 {
   public:
     void draw(char x, char y, bool c);
-    bool checkLight(char x, char y) const;
+    bool checkLight(char x, char y);
+    bool checkMoveable(char x, char y);
     void move(String str);
-    void fall();
-    void rotate();
-    void spawnNew();
+    void fall(float angle);
   private:
-    void checkBlock();
-    void block();
-    bool field[16][20][2] = {};
-    char identifyShape();
-    void clear();
-    char cur_shape = 'J';
-    int cur_shape_centre[2] = {};
-    char cur_rotate_phase = 0;
+    static const char length = 16;
+    static const char height = 16;
+    bool field[length][height][2] = {};
 };
-
 #endif

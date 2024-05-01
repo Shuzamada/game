@@ -52,15 +52,15 @@ void drawField(const Field& f)
 {
   for (short i = 0; i < 16; i++)
   {
-    for (short j = 4; j < 20; j++)
+    for (short j = 4; j < 16; j++)
     {
       if (f.checkLight(i, j))
       {
-        draw(j - 4, i, 1);
+        draw(j, i, 1);
       }
       else
       {
-        draw(j - 4, i, 0);
+        draw(j, i, 0);
       }
     }
   }
