@@ -8,6 +8,9 @@
 Max72xxPanel matrix = getMatrix();
 Field f;
 
+bool but_flag = false;
+bool but = false;
+
 void setup()
 {
   Serial.begin(9600);
@@ -18,33 +21,33 @@ void setup()
   f.draw(6, 4, 1);
   f.draw(6, 5, 1);
   drawField(f);
+  pinMode(A5, INPUT_PULLUP);
 }
 
-void move()
+void checkBut()
 {
-   int d = Serial.parseInt();
-   if (d == 4)
-   f.move("left");
-   else if (d == 6)
-   f.move("right");
-   else if (d == 2)
-   f.move("down");
-   else if (d == 8)
-   f.draw(4, 4, 1);
+   but = !digitalRead(A5);
+
+   if (but == 1 && but_flag == 0)
+   {
+    but_flag = 1;
+    f.draw(4, 4, 1);
+   }
+   if (but == 0 && but_flag == 1)
+   {
+    but_flag = 0;
+   }
 }
 
 unsigned long last = millis();
 void loop()
 {
-  if (Serial.available())
-  {
-    move();
-  }
+  checkBut();
   if (millis() - last > 100)
   {
     last = millis();
-    drawField(f);
     f.fall(180.0);
+    drawField(f);
   }
   drawField(f);
 }
