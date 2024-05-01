@@ -9,6 +9,7 @@
 
 size_t cell_size = 30;
 
+
 void drawBaseField(sf::RenderWindow& window)
 {
   for (int i = 0; i < 16; i++)
@@ -71,6 +72,21 @@ void drawForceVector(sf::RenderWindow& window, float angle)
   window.draw(arrow);
 }
 
+void caclPixel(sf::RenderWindow& window, Field& f)
+{
+  int count = 0;
+  for (char i = 0; i < f.length; i++)
+  {
+    for (char j = 0; j < f.height; j++)
+    {
+      if (f.checkMoveable(i, j))
+      {
+        count++;
+      }
+    }
+  }
+  std::cout << count << "\n";
+}
 
 int main()
 {
@@ -99,36 +115,16 @@ int main()
       {
         window.close();
       }
-      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-      {
-        std::cout << "pressed Left\n";
-        f.move("left");
-      }
-      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-      {
-        std::cout << "pressed Right\n";
-        f.move("right");
-      }
-      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-      {
-        std::cout << "pressed Down\n";
-        f.move("down");
-        //f.fall(slider.sliderValue);
-      }
-      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-      {
-        std::cout << "pressed Up\n";
-        f.move("up");
-      }
       else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       {
         std::cout << "pressed Space\n";
-        f.fall(slider.sliderValue);
+        //f.fall(slider.sliderValue);
+        caclPixel(window, f);
       }
       else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
       {        
         std::cout << "pressed Enter\n";
-        f.draw(5,1,1);
+        f.draw(5,5,1);
         // f.draw(6,1,1);
         // f.draw(7,1,1);
         // f.draw(5,2,1);
@@ -141,9 +137,10 @@ int main()
     }
     if (std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch()) - last_move > std::chrono::milliseconds(20))
     {
-      //f.fall(slider.sliderValue);
+      f.fall(slider.sliderValue);
       last_move = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch());
-      //std::cout << slider.sliderValue << '\n';
+      std::cout << slider.sliderValue << '\n';
+      caclPixel(window, f);
     }
 
     window.clear();

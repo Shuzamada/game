@@ -29,187 +29,48 @@ bool Field::checkMoveable(char x, char y)
 
 void Field::move(std::string str)
 {
-  // if (str == "left")
-  // {
-  //   for (char j = 0; j < 20; j++)
-  //   {
-  //     for (char i = 15; i > 0; i--)
-  //     {
-  //         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-  //       if (field[i][j][1] && !field[i-1][j][0] && !field[i-1][j][1])
-  //       {
-  //         field[i-1][j][0] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i-1][j][1] = 1;
-  //         field[i][j][1] = 0;
-  //         i--;
-  //       }
-  //     }
-  //   }
-  // }
-  // else if (str == "right")
-  // {
-  //   for (char j = 0; j < 19; j++)
-  //   {
-  //     for (char i = 0; i < 15; i++)
-  //     {
-  //       std::cout << str << " " << int(i) << " " << int(j) << field[i][j][1] << !field[i+1][j][0] << !field[i+1][j][1] <<'\n' ;
-  //       if (field[i][j][1] && !field[i+1][j][0] && !field[i+1][j][1]) 
-  //       {
-  //         std::cout << "wtf1";
-  //         field[i+1][j][0] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i+1][j][1] = 1;
-  //         field[i][j][1] = 0;
-  //         if (i == 14 || i == 15)
-  //         {
-  //           break;
-  //         }
-  //         i++;
-  //       }
-  //     }
-  //   }
-  // }
-  // else if (str == "down")
-  // {
-  //   for (char i = 0; i < 16; i++)
-  //   {
-  //     for (char j = 0; j < 19; j++)
-  //     {
-  //         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-  //       if (field[i][j][1] && !field[i][j+1][0] && !field[i][j+1][1])
-  //       {
-  //         field[i][j+1][0] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i][j+1][1] = 1;
-  //         field[i][j][1] = 0;
-  //         j++;
-  //       }
-  //     }
-  //   }
-  // }
-  // else if (str == "up")
-  // {
-  //   for (char i = 0; i < 16; i++)
-  //   {
-  //     for (char j = 19; j > 0; j--)
-  //     {
-  //         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-  //       if (field[i][j][1] && !field[i][j-1][0] && !field[i][j-1][1])
-  //       {
-  //         field[i][j-1][0] = 1;
-  //         field[i][j-1][1] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i][j][1] = 0;
-  //         if (j!=0)
-  //         j--;
-  //       }
-  //     }
-  //   }
-  // }
-  // else if (str == "down_left")
-  // {
-  //   for (char i = 1; i < 16; i++)
-  //   {
-  //     for (char j = 0; j < 19; j++)
-  //     {
-  //       if (i == 0)
-  //       {
-  //         break;
-  //       }
-  //         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-  //       if (field[i][j][1] && !field[i-1][j+1][0] && !field[i-1][j+1][1] && field[i][j+1][1])
-  //       {
-  //         field[i-1][j+1][0] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i-1][j+1][1] = 1;
-  //         field[i][j][1] = 0;
-  //         if (j!=19)
-  //         j++;
-  //         if (i!=0)
-  //         i--;
-  //       }
-  //     }
-  //   }
-  // }
-  // else if (str == "down_right")
-  // {
-  //   for (char i = 0; i < 15; i++)
-  //   {
-  //     for (char j = 0; j < 19; j++)
-  //     {
-  //       if (i == 15)
-  //       {
-  //         break;
-  //       }
-  //         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-  //       if (field[i][j][1] && !field[i+1][j+1][0] && !field[i+1][j+1][1] && field[i][j+1][1])
-  //       {
-  //         field[i+1][j+1][0] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i+1][j+1][1] = 1;
-  //         field[i][j][1] = 0;
-  //         if (j!=19)
-  //         j++;
-  //         if (i!=15)
-  //         i++;
-  //       }
-  //     }
-  //   }
-  // }
-  // else if (str == "up_left")
-  // {
-  //   for (char i = 1; i < 16; i++)
-  //   {
-  //     for (char j = 19; j > 1; j--)
-  //     {
-  //         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-  //       if (field[i][j][1] && !field[i-1][j-1][0] && !field[i-1][j-1][1] && (field[i][j-1][1] || field[i-1][j][1]))
-  //       {
-  //         field[i-1][j-1][0] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i-1][j-1][1] = 1;
-  //         field[i][j][1] = 0;
-  //         if (j!=0)
-  //         j--;
-  //         if (i!=0)
-  //         i--;
-  //       }
-  //     }
-  //   }
-  // }
-  // else if (str == "up_right")
-  // {
-  //   for (char i = 0; i < 14 ; i++)
-  //   {
-  //     for (char j = 19; j > 1; j--)
-  //     {
-  //         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-  //       if (field[i][j][1] && !field[i+1][j-1][0] && !field[i+1][j-1][1] && (field[i][j-1][1] || field[i+1][j][1]))
-  //       {
-  //         field[i+1][j-1][0] = 1;
-  //         field[i][j][0] = 0;
-  //         field[i+1][j-1][1] = 1;
-  //         field[i][j][1] = 0;
-  //         if (j!=0)
-  //         j--;
-  //         if (i!=15)
-  //         i++;
-  //       }
-  //     }
-  //   }
-  // }
   if (str == "down")
   {
     for (char i = 0; i < length; i++)
     {
-      for (char j = 0; j < height - 1; j++)
+      for (char j = 0; j < height; j++)
       {
         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-        if (checkMoveable(i, j) && !checkLight(i, j + 1) && !checkMoveable(i, j + 1))
+        if (checkMoveable(i, j) && !checkLight(i, j + 1))
         {
           draw(i, j, 0);
           draw(i, j + 1, 1);
+          j++;
+        }
+      }
+    }
+  }
+  else if (str == "down_left")
+  {
+    for (char j = height; j >= 0; j--)
+    {
+      for (char i = 0; i < length; i++)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i , j + 1) && !checkLight(i - 1, j + 1))
+        {
+          draw(i, j, 0);
+          draw(i - 1, j + 1, 1);
+        }
+      }
+    }
+  }
+  else if (str == "down_right")
+  {
+    for (char j = 0; j < height; j++)
+    {
+      for (char i = length; i >= 0; i--)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i , j + 1) && !checkLight(i + 1, j + 1))
+        {
+          draw(i, j, 0);
+          draw(i + 1, j + 1, 1);
           j++;
         }
       }
@@ -219,14 +80,44 @@ void Field::move(std::string str)
   {
     for (char j = 0; j < height; j++)
     {
-      for (char i = length - 1; i > 0; i--)
+      for (char i = length - 1; i >= 0; i--)
       {
         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-        if (checkMoveable(i, j) && !checkLight(i - 1, j) && !checkMoveable(i - 1, j))
+        if (checkMoveable(i, j) && !checkLight(i - 1, j))
         {
           draw(i, j, 0);
           draw(i - 1, j, 1);
           i--;
+        }
+      }
+    }
+  }
+  else if (str == "left_down")
+  {
+    for (char i = 0; i < length; i++)
+    {
+      for (char j = 0; j < height; j++)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i - 1, j) && !checkLight(i - 1, j + 1))
+        {
+          draw(i, j, 0);
+          draw(i - 1, j + 1, 1);
+        }
+      }
+    }
+  }
+  else if (str == "left_up")
+  {
+    for (char i = 0; i < length; i++)
+    {
+      for (char j = 0; j < height; j++)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i - 1, j) && !checkLight(i - 1, j - 1))
+        {
+          draw(i, j, 0);
+          draw(i - 1, j - 1, 1);
         }
       }
     }
@@ -238,7 +129,7 @@ void Field::move(std::string str)
       for (char i = 0 ; i < length - 1; i++)
       {
         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-        if (checkMoveable(i, j) && !checkLight(i + 1, j) && !checkMoveable(i + 1, j))
+        if (checkMoveable(i, j) && !checkLight(i + 1, j))
         {
           draw(i, j, 0);
           draw(i + 1, j, 1);
@@ -247,14 +138,44 @@ void Field::move(std::string str)
       }
     }
   }
+  else if (str == "right_down")
+  {
+    for (char i = length; i > 0; i--)
+    {
+      for (char j = 0; j < height; j++)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i + 1, j) && !checkLight(i + 1, j + 1))
+        {
+          draw(i, j, 0);
+          draw(i + 1, j + 1, 1);
+        }
+      }
+    }
+  }
+  else if (str == "right_up")
+  {
+    for (char i = length; i > 0; i--)
+    {
+      for (char j = 0; j < height; j++)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i + 1, j) && !checkLight(i + 1, j - 1))
+        {
+          draw(i, j, 0);
+          draw(i + 1, j - 1, 1);
+        }
+      }
+    }
+  }
   else if (str == "up")
   {
     for (char i = 0; i < length; i++)
     {
-      for (char j = height - 1; j > 0 ; j--)
+      for (char j = height - 1; j >= 0 ; j--)
       {
         std::cout << str << " " << int(i) << " " << int(j) <<'\n';
-        if (checkMoveable(i, j) && !checkLight(i, j - 1) && !checkMoveable(i, j - 1))
+        if (checkMoveable(i, j) && !checkLight(i, j - 1))
         {
           draw(i, j, 0);
           draw(i, j - 1, 1);
@@ -263,58 +184,91 @@ void Field::move(std::string str)
       }
     }
   }
+  else if (str == "up_left")
+  {
+    for (char j = 0; j < height; j++)
+    {
+      for (char i = length; i > 0; i--)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i, j - 1) && !checkLight(i - 1, j - 1))
+        {
+          draw(i, j, 0);
+          draw(i - 1, j - 1, 1);
+        }
+      }
+    }
+  }
+  else if (str == "up_right")
+  {
+    for (char j = 0; j < height; j++)
+    {
+      for (char i = 0; i < length; i++)
+      {
+        std::cout << str << " " << int(i) << " " << int(j) <<'\n';
+        if (checkMoveable(i, j) && checkLight(i, j - 1) && !checkLight(i + 1, j - 1))
+        {
+          draw(i, j, 0);
+          draw(i + 1, j - 1, 1);
+        }
+      }
+    }
+  }
 }
 
 void Field::fall(int angle)
 {
-  if (angle < 225 && angle > 135)
+  if (angle > 360 - 22.5 || angle < 22.5)
+  {
+    move("up");
+    move("up_left");
+    move("up_right");
+  }
+  if (angle > 45 - 22.5 && angle < 45 + 22.5)
+  {
+    move("right_up");
+    move("up_right");
+    move("up");
+    move("right");
+  }
+  if (angle > 90 - 22.5 && angle < 90 + 22.5)
+  {
+    move("right");
+    move("right_down");
+    move("right_up");
+  }
+  if (angle > 135 - 22.5 && angle < 135 + 22.5)
+  {
+    move("down_right");
+    move("right_down");
+    move("down");
+    move("right");
+  }
+  if (angle > 180 - 22.5 && angle < 180 + 22.5)
   {
     move("down");
     move("down_left");
     move("down_right");
   }
-  else if (angle < 270 && angle > 180)
+  if (angle > 225 - 22.5 && angle < 225 + 22.5)
   {
     move("down_left");
+    move("left_down");
     move("down");
     move("left");
   }
-  else if (angle < 315 && angle > 225)
+  if (angle > 270 - 22.5 && angle < 270 + 22.5)
   {
     move("left");
-    move("down_left");
-    move("up_left");
+    move("left_up");
+    move("left_down");
   }
-  else if (angle < 360 && angle > 270)
+  if (angle > 315 - 22.5 && angle < 315 + 22.5)
   {
+    move("left_up");
     move("up_left");
-    move("up");
     move("left");
-  }
-  else if (angle < 90 && angle > 0)
-  {
-    move("up_right");
     move("up");
-    move("right");
-  }
-  else if (angle < 135 && angle > 45)
-  {
-    move("right");
-    move("up_right");
-    move("down_right");
-
-  }
-  else if (angle < 180 && angle > 90)
-  {
-    move("down_right");
-    move("down");
-    move("right");
-  }
-  else
-  {
-    move("up");
-    move("up_left");
-    move("up_right");
   }
 }
 
